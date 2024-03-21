@@ -53,6 +53,7 @@ const VideoCarousel = () => {
     }
   };
 
+  /* @ts-ignore */
   const handleLoadedMetaData = (i: number, e: HTMLVideoElement ) => setLoadedData((pre) => [...pre, e]);
 
   useGSAP(() => {
@@ -131,6 +132,7 @@ const VideoCarousel = () => {
       // update the progress bar
       const animUpdate = () => {
         anim.progress(
+          /* @ts-ignore */
           videoRef.current[videoId].currentTime /
             hightlightsSlides[videoId].videoDuration
         );
@@ -149,8 +151,10 @@ const VideoCarousel = () => {
   useEffect(() => {
     if (loadedData.length > 3) {
       if (!isPlaying) {
+        /* @ts-ignore */
         videoRef.current[videoId].pause();
       } else {
+        /* @ts-ignore */
         startPlay && videoRef.current[videoId].play();
       }
     }
@@ -171,6 +175,7 @@ const VideoCarousel = () => {
                   } pointer-events-none`}
                   preload='auto'
                   muted
+                  /* @ts-ignore */
                   ref={(el) => (videoRef.current[i] = el)}
                   onEnded={() =>
                     i !== 3
@@ -180,6 +185,7 @@ const VideoCarousel = () => {
                   onPlay={() =>
                     setVideo((pre) => ({ ...pre, isPlaying: true }))
                   }
+                  /* @ts-ignore */
                   onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
                 >
                   <source src={list.video} type='video/mp4' />
@@ -204,10 +210,12 @@ const VideoCarousel = () => {
             <span
               key={i}
               className='mx-2 w-3 h-3 bg-gray-200 rounded-full relative cursor-pointer'
+              /* @ts-ignore */
               ref={(el) => (videoDivRef.current[i] = el)}
             >
               <span
                 className='absolute h-full w-full rounded-full'
+                /* @ts-ignore */
                 ref={(el) => (videoSpanRef.current[i] = el)}
               />
             </span>
